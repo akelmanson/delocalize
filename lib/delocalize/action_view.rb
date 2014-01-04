@@ -33,7 +33,7 @@ ActionView::Helpers::InstanceTag.class_eval do
     when :number
       options[:value] = number_with_precision(value)
     when :percent
-      options[:value] = number_with_precision(value * 100.0)
+      options[:value] = value ? number_with_precision(value * 100.0) : nil
     when :date, :time
       options[:value] = value ? I18n.l(value, :format => options.delete(:format) || :default) : nil
     end
