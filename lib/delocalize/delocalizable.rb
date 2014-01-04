@@ -56,6 +56,8 @@ module Delocalize
               case type
               when :number
                 value = LocalizedNumericParser.parse(value) rescue value
+              when :percent
+                value = (LocalizedNumericParser.parse(value).to_f / 100.0).to_s rescue value
               when :date, :time
                 value = LocalizedDateTimeParser.parse(value, type.to_s.classify.constantize) rescue value
                 value = value.in_time_zone if value.acts_like?(:time)
